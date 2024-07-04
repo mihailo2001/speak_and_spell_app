@@ -20,12 +20,21 @@ module.exports = (sequelize, DataTypes) => {
         cost: {
             type: DataTypes.DECIMAL(10, 2),
             allowNull: false
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     });
 
     Course.associate = (models) => {
         Course.hasMany(models.Enrollment, {
             onDelete: 'cascade',
+        });
+        
+        Course.belongsTo(models.User, {
+            foreignKey: 'userId',
+            allowNull: false
         });
     }
 
