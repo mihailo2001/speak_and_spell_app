@@ -10,6 +10,13 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
     });
+
+    Post.associate = (models) => {
+        
+        Post.hasMany(models.File, {
+            onDelete: 'cascade',
+        });
+    }
     
     return Post;
   };
