@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
+const jwt = require('jsonwebtoken');
 
 router.get('/', async (req, res) => {
     try {
@@ -14,17 +15,76 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.post('/', async (req, res) => {
+router.get('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findByPk(id, { attributes: { exclude: ['password'] } });
+        if (!user) return res.status(404).json({ message: "User not found" });
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.post('/register', async (req, res) => {
     const { username, password, role, description } = req.body;
     try {
-        const hash = await bcrypt.hash(password, 10);
-        await User.create({
-            username: username,
-            password: hash,
-            role: role, 
-            description: description
+        const hashedPassword = await bcrypt.hash(password, 10);
+        const newUser = await User.create({
+            username,
+            password: hashedPassword,
+            role,
+            description
         });
-        res.status(201).json("Success");
+        res.status(201).json(newUser);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.post('/login', async (req, res) => {
+    const { username, password } = req.body;
+    try {
+        const user = await User.findOne({ where: { username } });
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        const isMatch = await bcrypt.compare(password, user.password);
+        if (!isMatch) return res.status(401).json({ message: "Invalid password" });
+
+        const accessToken = jwt.sign( { id: user.id, role: user.role }, 'randomstring');
+        res.json({ token: accessToken, username: user.username, id: user.id });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.put('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    const { username, password, role, description } = req.body;
+    try {
+        const user = await User.findByPk(id);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        if (username) user.username = username;
+        if (password) user.password = await bcrypt.hash(password, 10);
+        if (role) user.role = role;
+        if (description) user.description = description;
+
+        await user.save();
+        res.json(user);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.delete('/users/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const user = await User.findByPk(id);
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        await user.destroy();
+        res.json({ message: "User deleted successfully" });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

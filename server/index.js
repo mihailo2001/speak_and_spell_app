@@ -8,7 +8,7 @@ const userRouter = require('./routes/User');
 const courseRouter = require('./routes/Course');
 const postRouter = require('./routes/Post');
 
-app.use('/users', userRouter);
+app.use('/auth', userRouter);
 app.use('/courses', courseRouter);
 app.use('/posts', postRouter);
 
