@@ -21,7 +21,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         });
         Child.hasMany(models.Enrollment, {
-            onDelete: 'cascade',
+            foreignKey: 'childId',
+            onDelete: 'CASCADE'
         });
     }
 
