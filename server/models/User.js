@@ -26,10 +26,12 @@ module.exports = (sequelize, DataTypes) => {
             foreignKey: 'userId'
         });
         User.hasMany(models.Payment, {
-            onDelete: 'cascade'
+            onDelete: 'cascade',
+            foreignKey: 'userId'
         });
         User.hasMany(models.Post, {
-            onDelete: 'cascade'
+            onDelete: 'cascade',
+            foreignKey: 'userId'
         });
     }
 

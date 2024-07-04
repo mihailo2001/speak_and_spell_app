@@ -6,16 +6,26 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.DECIMAL(10, 2),
             allowNull: false
         },
-        month: {
+        date: {
             type: DataTypes.DATE,
             allowNull: false
         },
         status: {
             type: DataTypes.STRING,
             defaultValue: 'unpaid'
+        },
+        userId: {
+            type: DataTypes.INTEGER,
+            allowNull: false
         }
     });
-    
+
+    Payment.associate = (models) => {
+        Payment.belongsTo(models.User, {
+            foreignKey: 'userId',
+            allowNull: false
+        });
+    }
     return Payment;
   };
   
