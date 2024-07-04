@@ -12,7 +12,8 @@ module.exports = (sequelize, DataTypes) => {
         role: {
             type: DataTypes.STRING,
             defaultValue: 'parent'
-        }
+        },
+        description: DataTypes.TEXT,
     });
 
     User.associate = (models) => {

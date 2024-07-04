@@ -1,10 +1,19 @@
 const express = require('express');
 const app = express();
 
-const db = require('./models');
+app.use(express.json());
 
-db.sequelize.sync(() => { 
+const db = require('./models');
+const userRouter = require('./routes/User');
+const courseRouter = require('./routes/Course');
+const postRouter = require('./routes/Post');
+
+app.use('/users', userRouter);
+app.use('/courses', courseRouter);
+app.use('/posts', postRouter);
+
+db.sequelize.sync().then(() => {
     app.listen(3001, () => {
-        console.log("Server running on port 3001.");
+        console.log('Server running on port 3001.');
     });
 });
