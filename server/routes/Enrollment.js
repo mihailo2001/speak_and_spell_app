@@ -22,6 +22,26 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/byChild/:childId', async (req, res) => {
+    const { childId } = req.params;
+    try {
+        const listOfEnrolls = await Enrollment.findAll({ where: { childId: childId } });
+        res.json(listOfEnrolls);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/byCourse/:courseId', async (req, res) => {
+    const { courseId } = req.params;
+    try {
+        const listOfEnrolls = await Enrollment.findAll({ where: { courseId: courseId } });
+        res.json(listOfEnrolls);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/', async (req, res) => {
     const { status, childId, courseId } = req.body;
     try {

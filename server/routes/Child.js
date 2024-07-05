@@ -28,6 +28,16 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/byParent/:parentId', async (req, res) => {
+    const { parentId } = req.params;
+    try {
+        const children = await Child.findAll({ where: { userId: parentId } });
+        res.json(children);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/', async (req, res) => {
     const { name, birthdate, userId } = req.body;
     try {

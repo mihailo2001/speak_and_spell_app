@@ -28,12 +28,22 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/byUser/:userId', async (req, res) => {
+    const { userId } = req.params;
+    try {
+        const listOfPayments = await Payment.findAll({ where: { userId: userId, status: "unpaid" } });
+        res.json(listOfPayments);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/', async (req, res) => {
-    const { amount, month, status, userId } = req.body;
+    const { amount, date, status, userId } = req.body;
     try {
         await Payment.create({ 
             amount, 
-            month, 
+            date, 
             status, 
             userId
         });
@@ -45,13 +55,13 @@ router.post('/', async (req, res) => {
 
 router.put('/:id', async (req, res) => {
     const { id } = req.params;
-    const { amount, month, status, userId } = req.body;
+    const { amount, date, status, userId } = req.body;
     try {
         const payment = await Payment.findByPk(id);
         if (!payment) return res.status(404).json({ message: "Payment not found" });
 
         if (amount) payment.amount = amount;
-        if (month) payment.month = month;
+        if (date) payment.month = month;
         if (status) payment.status = status;
         if (userId) payment.userId = userId;
 
