@@ -4,7 +4,10 @@ const { Child, User } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
-        const children = await Child.findAll({ include: User });
+        const children = await Child.findAll({ include: [{
+            model: User,
+            attributes: { exclude: ['password'] }
+        }] });
         res.json(children);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -14,7 +17,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const child = await Child.findByPk(id, { include: User });
+        const child = await Child.findByPk(id, { include: [{
+            model: User,
+            attributes: { exclude: ['password'] }
+        }] });
         if (!child) return res.status(404).json({ message: "Child not found" });
         res.json(child);
     } catch (error) {

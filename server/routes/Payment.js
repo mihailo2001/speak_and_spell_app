@@ -4,7 +4,10 @@ const { Payment, User } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
-        const payment = await Payment.findAll({ include: User });
+        const payment = await Payment.findAll({ include: [{
+            model: User,
+            attributes: { exclude: ['password'] }
+        }] });
         res.json(payment);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -14,7 +17,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const payment = await Payment.findByPk(id, { include: User });
+        const payment = await Payment.findByPk(id, { include: [{
+            model: User,
+            attributes: { exclude: ['password'] }
+        }] });
         if (!payment) return res.status(404).json({ message: "Payment not found" });
         res.json(payment);
     } catch (error) {

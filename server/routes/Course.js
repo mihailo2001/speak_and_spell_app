@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const { Course } = require('../models');
+const { Course, User } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
@@ -14,7 +14,10 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
-        const course = await Course.findByPk(id, { include: User });
+        const course = await Course.findByPk(id, { include: [{
+            model: User,
+            attributes: { exclude: ['password'] }
+        }] });
         if (!course) return res.status(404).json({ message: "Course not found" });
         res.json(course);
     } catch (error) {
@@ -23,16 +26,15 @@ router.get('/:id', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const { title, description, teacherId, weekday, time, cost, userId } = req.body;
+    const { title, description, teacherId, weekday, time, cost } = req.body;
     try {
         await Course.create({
             title: title,
             description: description,
-            teacherId: teacherId, 
+            userId: teacherId, 
             weekday: weekday,
             time: time,
             cost: cost,
-            userId: userId
         });
         res.status(201).json("Success");
     } catch (error) {
