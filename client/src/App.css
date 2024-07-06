@@ -1,3 +1,69 @@
+* {
+  margin: 0;
+}
+
 .App {
   text-align: center;
+}
+
+/* Navbar */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px;
+  background-color: #333;
+  color: white;
+}
+
+.navbar-right, .navbar-left{
+  display: flex;
+  align-items: center;
+}
+
+.navbar-left a,
+.navbar-right a,
+.dropbtn {
+  color: white;
+  padding: 14px 20px;
+  text-decoration: none;
+  text-align: center;
+  background-color: #333;
+}
+
+.navbar-left a:hover,
+.navbar-right a:hover,
+.dropdown:hover .dropbtn {
+  background-color: #575757;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  min-width: 160px;
+}
+
+.dropdown-content .dropdown-item {
+  color: white;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+  cursor: pointer;
+}
+
+.dropdown-content .dropdown-item:hover {
+  background-color: #575757;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}
+
+.navbar-left .logo {
+  height: 40px;
 }
