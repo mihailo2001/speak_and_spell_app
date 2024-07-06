@@ -64,10 +64,9 @@ const Navbar = () => {
     <nav className="navbar">
       <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
 
-        <div className="navbar-left">
+        <div className="logoDiv">
           <img id='logo' src="/images/logo.png" alt="Logo" className="logo" />
           <h1>SPEAK & SPELL</h1>
-
         </div>
       </Link>
 

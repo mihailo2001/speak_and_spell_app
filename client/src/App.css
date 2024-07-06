@@ -6,15 +6,24 @@
   text-align: center;
 }
 
-/* Navbar */
-.navbar {
+/* Navbar, Footer */
+.navbar, footer {
   display: flex;
-  justify-content: space-between;
+  flex-direction: row;
   align-items: center;
-  padding: 20px;
   background-color: #333;
   color: white;
   height: max-content;
+}
+
+.navbar {
+  padding: 20px;
+  justify-content: space-between;
+}
+
+.footer{
+  padding: 40px;
+  justify-content: space-around;
 }
 
 #logo {
@@ -23,22 +32,23 @@
 }
 
 .navbar-right,
-.navbar-left {
+.logoDiv {
   display: flex;
+  flex-direction: row;
   align-items: center;
+  gap: 24px;
 }
 
-.navbar-left a,
 .navbar-right a,
+.footer a,
 .dropbtn {
   color: white;
-  padding: 14px 20px;
   text-decoration: none;
   text-align: center;
   background-color: #333;
+  font-size: large;
 }
 
-.navbar-left a:hover,
 .navbar-right a:hover,
 .dropdown:hover .dropbtn {
   background-color: #575757;
@@ -71,8 +81,17 @@
   display: block;
 }
 
-.navbar-left .logo {
-  height: 40px;
+.footerLinks,
+.footerCourses{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  color: white;
+} 
+
+ul {
+  text-align: start;
 }
 
 /*Register*/
