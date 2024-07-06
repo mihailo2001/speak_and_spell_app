@@ -62,9 +62,14 @@ const Navbar = () => {
   return (
 
     <nav className="navbar">
-      <div className="navbar-left">
-        <img src="logo.png" alt="Logo" className="logo" />
-      </div>
+      <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
+
+        <div className="navbar-left">
+          <img id='logo' src="/images/logo.png" alt="Logo" className="logo" />
+          <h1>SPEAK & SPELL</h1>
+
+        </div>
+      </Link>
 
       <div className="navbar-right">
         <Link to="/">Pocetna</Link>
