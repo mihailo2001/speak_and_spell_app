@@ -1,31 +1,67 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import { AuthContext } from '../helpers/AuthContext';
 
 const Navbar = () => {
 
-    const [courses, setCourses] = useState([]);
-    const navigate = useNavigate();
+  const { authState, setAuthState } = useContext(AuthContext);
 
-    useEffect(() => {
-        const fetchCourses = async () => {
-            try {
-                const response = await axios.get('http://localhost:3001/courses');
-                setCourses(response.data.listOfCourses);
-            } catch (error) {
-                console.log('Error fetching courses', error);
-            }
+  useEffect(() => {
+    axios.get('http://localhost:3001/auth/auth',
+      {
+        headers: {
+          accessToken: localStorage.getItem('accessToken'),
+        },
+      })
+      .then((response) => {
+        if (response.data.error)
+          setAuthState({ ...authState, status: false });
+        else {
+          setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            status: true,
+            role: response.data.role,
+          });
         }
-        fetchCourses();
-    }, []);
+      });
+  }, []);
 
-    const handleCourseClick = (id) => {
-        navigate(`/course/${id}`);
-    };
+  const logout = () => {
+    localStorage.removeItem('accessToken');
+    setAuthState({
+      username: "",
+      id: 0,
+      status: false,
+      role: ""
+    });
+    navigate('/');
+  };
+
+  //Courses dropdown
+  const [courses, setCourses] = useState([]);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        const response = await axios.get('http://localhost:3001/courses');
+        setCourses(response.data.listOfCourses);
+      } catch (error) {
+        console.log('Error fetching courses', error);
+      }
+    }
+    fetchCourses();
+  }, []);
+
+  const handleCourseClick = (id) => {
+    navigate(`/course/${id}`);
+  };
 
   return (
 
-    <nav className="navbar"> 
+    <nav className="navbar">
       <div className="navbar-left">
         <img src="logo.png" alt="Logo" className="logo" />
       </div>
@@ -37,9 +73,9 @@ const Navbar = () => {
           <a className="dropbtn">Kursevi</a>
           <div className="dropdown-content">
             {courses.map((course) => (
-                <a className="dropdown-item" key={course.id} onClick={() => handleCourseClick(course.id)}>
-                    {course.title}
-                </a>
+              <a className="dropdown-item" key={course.id} onClick={() => handleCourseClick(course.id)}>
+                {course.title}
+              </a>
             ))}
           </div>
         </div>
@@ -47,8 +83,17 @@ const Navbar = () => {
         <Link to="/blog">Blog</Link>
         <Link to="/about">O nama</Link>
         <Link to="/contact">Kontakt</Link>
-        <Link to="/login">Login</Link>
-        <Link to="/register">Register</Link>
+        {authState.status ? (
+          <>
+            <Link to="/profile">My Profile</Link>
+            <span onClick={logout} style={{ cursor: 'pointer' }}>Logout</span>
+          </>
+        ) : (
+          <>
+            <Link to="/login">Login</Link>
+            <Link to="/register">Register</Link>
+          </>
+        )}
       </div>
     </nav>
   );

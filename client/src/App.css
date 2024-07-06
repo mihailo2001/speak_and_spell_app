@@ -16,7 +16,8 @@
   color: white;
 }
 
-.navbar-right, .navbar-left{
+.navbar-right,
+.navbar-left {
   display: flex;
   align-items: center;
 }
@@ -66,4 +67,76 @@
 
 .navbar-left .logo {
   height: 40px;
+}
+
+/*Register*/
+
+/* Add this CSS code to your styles.css file */
+
+.registrationPage,
+.loginPage {
+  margin: 10%;
+  display: flex;
+  justify-content: center;
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  background-color: #fff;
+  padding: 20px;
+  border: 3px solid #333;
+  border-radius: 5px;
+  width: 25%;
+}
+
+.formContainer>form {
+  display: flex;
+  flex-direction: column;
+}
+
+.label {
+  margin-bottom: 5px;
+  font-weight: bold;
+  text-align: start;
+}
+
+.inputField {
+  margin-bottom: 10px;
+  padding: 10px;
+  border: 2px solid #333;
+  border-radius: 3px;
+}
+
+.inputField:focus {
+  outline: none;
+  border-color: #575757;
+}
+
+.errorMessage {
+  color: red;
+  font-size: 12px;
+  margin-bottom: 10px;
+  text-align: start;
+}
+
+.submitButton {
+  padding: 10px;
+  border: none;
+  border-radius: 3px;
+  background-color: #333;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.submitButton:hover {
+  background-color: #575757;
+}
+
+.smallLink {
+  color: #333;
+  text-decoration: none;
+  text-align: center;
+  font-weight: bold;
 }

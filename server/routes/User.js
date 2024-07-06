@@ -3,6 +3,7 @@ const router = express.Router();
 const { User } = require('../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const { validateToken } = require('../middlewares/AuthMiddleware')
 
 router.get('/', async (req, res) => {
     try {
@@ -24,6 +25,10 @@ router.get('/users/:id', async (req, res) => {
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
+});
+
+router.get('/auth', validateToken, (req, res) => {
+    res.json(req.user);
 });
 
 router.post('/register', async (req, res) => {

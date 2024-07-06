@@ -1,10 +1,11 @@
 const express = require('express');
 const path = require('path');
 const app = express();
+const cors = require('cors');
 
 app.use(express.json());
 app.use('/files', express.static(path.join(__dirname, './public/files')));
-
+app.use(cors());
 
 const db = require('./models');
 const userRouter = require('./routes/User');
