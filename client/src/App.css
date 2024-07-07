@@ -219,6 +219,7 @@ ul {
   font-size: 40px;
   padding: 10%;
   gap: 50px;
+  width: 100%;
 }
 
 .courseDiv {
@@ -238,6 +239,7 @@ ul {
   flex-wrap: wrap;
   background-color: inherit;
   color: inherit;
+  width: 100%;
 }
 
 
@@ -325,7 +327,8 @@ ul {
 }
 
 .contactDiv h1,
-.blogPage h1 {
+.blogPage h1,
+.postPage h1 {
   font-size: 50px;
 }
 
@@ -339,7 +342,8 @@ ul {
   height: auto;
 }
 
-.blogPage {
+.blogPage,
+.postPage {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -361,4 +365,26 @@ ul {
 .blogCard{
   width: 25%;
   height: auto;
+}
+
+.postContent {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+}
+
+.imageList {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 24px;
+}
+
+.imageList img {
+  height: 200px;
+  width: auto;
 }

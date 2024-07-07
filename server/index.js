@@ -4,7 +4,7 @@ const app = express();
 const cors = require('cors');
 
 app.use(express.json());
-app.use('/files', express.static(path.join(__dirname, './public/files')));
+app.use('/static', express.static(path.join(__dirname, './public/images')));
 app.use(cors());
 
 const db = require('./models');

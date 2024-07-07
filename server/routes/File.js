@@ -9,7 +9,9 @@ const storage = multer.diskStorage({
         cb(null, 'public/images');
     },
     filename: function (req, file, cb) {
-        cb(null, Date.now() + '--' + path.extname(file.originalname));
+        const originalName = path.basename(file.originalname, path.extname(file.originalname));
+        const extension = path.extname(file.originalname);
+        cb(null, `${originalName}${extension}`)
     }
 });
 
@@ -27,15 +29,6 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ storage: storage, fileFilter: fileFilter });
 
-router.get('/', async (req, res) => {
-    try {
-        const files = await File.findAll();
-        res.json(files);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
 router.get('/:postId', async (req, res) => {
     const { postId } = req.params;
     try {
@@ -52,7 +45,7 @@ router.post('/', upload.single('file'), async (req, res) => {
     try {
         await File.create({
             filename: file.originalname,
-            filepath: file.path,
+            filepath: file.originalname,
             postId
         });
         res.status(201).json("File added");

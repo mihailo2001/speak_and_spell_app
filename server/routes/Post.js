@@ -49,6 +49,9 @@ router.get('/:id', async (req, res) => {
             include: [{
                 model: User,
                 attributes: { exclude: ['password'] }
+            },
+            {
+                model: File
             }]
         });
         if (!post) return res.status(404).json({ message: "Post not found" });
@@ -77,7 +80,7 @@ router.put('/:id', async (req, res) => {
     const { title, content, userId } = req.body;
     try {
         const post = await Post.findByPk(id);
-        
+
         if (title) post.title = title;
         if (content) post.content = content;
         if (userId) post.userId = userId;

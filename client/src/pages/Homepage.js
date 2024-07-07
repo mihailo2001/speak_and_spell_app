@@ -37,7 +37,7 @@ const Homepage = () => {
           try {
             const filesResponse = await axios.get(`http://localhost:3001/posts/${post.id}/files`);
             const files = filesResponse.data;
-            const image = files.length > 0 ? files[0].filepath : '';
+            const image = files.length > 0 ? files[0].filename : '';
       
             postsWithImages.push({ ...post, image });
           } catch (error) {
@@ -90,7 +90,7 @@ const Homepage = () => {
         <h1>Recent Blog Posts</h1>
         <div className='cardsInDiv'>
           {posts.map((post, index) => (
-            <PostCard key={index} postId={post.id} image={post.image} title={post.title} />
+            <PostCard key={index} postId={post.id} image={`http://localhost:3001/static/${post.image}`} title={post.title} />
           ))}
         </div>
       </div>

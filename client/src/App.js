@@ -7,7 +7,9 @@ import Footer from './components/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Blog from './pages/Blog';
+import Post from './pages/Post';
 import Contact from './pages/Contact';
+
 import Profile from './pages/Profile';
 import { AuthContext } from './helpers/AuthContext';
 import { useState } from 'react';
@@ -33,6 +35,7 @@ function App() {
             <Route path="/register" element={<Register />} />
             <Route path='/blog' element={<Blog />} />
             <Route path='/contact' element={<Contact/>} />
+            <Route path="/post/:id" exact element={<Post/>}/>
             <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer/>
