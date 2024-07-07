@@ -41,9 +41,6 @@ const Post = () => {
                 <div className='postBody'> {postObject.content} </div>
                 <div className='autor'>
                     autor: {postObject.User?.username}
-                    {authState.username === postObject.User?.username &&
-                        <button onClick={() => { deletePost(postObject.id); }}> Delete Post </button>
-                    }
                 </div>
             </div>
             <div className="imageList">
@@ -53,6 +50,9 @@ const Post = () => {
                     </div>
                 ))}
             </div>
+            {authState.username === postObject.User?.username &&
+                <button className='deletePost' onClick={() => { deletePost(postObject.id); }}> Delete Post </button>
+            }
         </div>
     )
 }

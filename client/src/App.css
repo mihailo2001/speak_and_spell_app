@@ -150,7 +150,8 @@ ul {
   text-align: start;
 }
 
-.submitButton {
+.submitButton,
+.deletePost {
   padding: 10px;
   border: none;
   border-radius: 3px;
@@ -160,7 +161,8 @@ ul {
   cursor: pointer;
 }
 
-.submitButton:hover {
+.submitButton:hover,
+.deletePost:hover {
   background-color: #575757;
 }
 
@@ -219,7 +221,10 @@ ul {
   font-size: 40px;
   padding: 10%;
   gap: 50px;
-  width: 100%;
+}
+
+.recentBlogs {
+  width: 80%;
 }
 
 .courseDiv {
@@ -342,6 +347,8 @@ ul {
   height: auto;
 }
 
+/*Blog & Post*/
+
 .blogPage,
 .postPage {
   display: flex;
@@ -388,3 +395,4 @@ ul {
   height: 200px;
   width: auto;
 }
+

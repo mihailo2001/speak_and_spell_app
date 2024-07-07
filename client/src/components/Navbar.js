@@ -26,7 +26,7 @@ const Navbar = () => {
           });
         }
       });
-  }, []);
+  }, [setAuthState]);
 
   const logout = () => {
     localStorage.removeItem('accessToken');

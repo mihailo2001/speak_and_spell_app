@@ -9,10 +9,10 @@ import Register from './pages/Register';
 import Blog from './pages/Blog';
 import Post from './pages/Post';
 import Contact from './pages/Contact';
-
 import Profile from './pages/Profile';
 import { AuthContext } from './helpers/AuthContext';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import axios from 'axios';
 
 function App() {
 
@@ -22,6 +22,27 @@ function App() {
     status: false,
     role: ""
   });
+
+  useEffect(() => {
+    axios.get('http://localhost:3001/auth/auth', {
+      headers: {
+        accessToken: localStorage.getItem('accessToken'),
+      },
+    })
+    .then((response) => {
+      if (response.data.error) {
+        setAuthState({ ...authState, status: false });
+      } else {
+        setAuthState({
+          username: response.data.username,
+          id: response.data.id,
+          status: true,
+          role: response.data.role
+        });
+      }
+      console.log(authState.username);
+    });
+  }, []);
 
   return (
     <div className="App">
