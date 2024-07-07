@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const { Post, User, File } = require('../models');
 
-router.get('/5posts', async (req, res) => {
+router.get('/', async (req, res) => {
     try {
         const listOfPosts = await Post.findAll({
             include: [{
