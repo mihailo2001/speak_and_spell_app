@@ -85,7 +85,6 @@ const Navbar = () => {
         </div>
 
         <Link to="/blog">Blog</Link>
-        <Link to="/about">O nama</Link>
         <Link to="/contact">Kontakt</Link>
         {authState.status ? (
           <>

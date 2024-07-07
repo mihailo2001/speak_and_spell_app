@@ -6,6 +6,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Login from './pages/Login';
 import Register from './pages/Register';
+import Contact from './pages/Contact';
 import Profile from './pages/Profile';
 import { AuthContext } from './helpers/AuthContext';
 import { useState } from 'react';
@@ -29,6 +30,7 @@ function App() {
             <Route path="/course/:id" element={<Course />} />
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
+            <Route path='/contact' element={<Contact/>} />
             <Route path="/profile" element={<Profile />} />
           </Routes>
           <Footer/>

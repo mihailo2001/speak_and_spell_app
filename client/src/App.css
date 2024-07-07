@@ -298,3 +298,43 @@ ul {
   font-size: 1.2em;
   margin: 8px 0;
 }
+
+/*Kontakt*/
+
+.contactPage {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+}
+
+.contactDiv,
+.contactInfo,
+.map {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: start;
+  text-align: start;
+}
+
+.contactDiv{
+  padding: 10%;
+  gap: 12px;
+}
+
+.contactDiv h1 {
+  font-size: 50px;
+}
+
+.contactInfo {
+  gap: 6px;
+  width: 10rem;
+}
+
+.map {
+  width: 30%;
+  height: auto;
+}
+
