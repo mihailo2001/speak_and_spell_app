@@ -9,7 +9,21 @@ import Register from './pages/Register';
 import Blog from './pages/Blog';
 import Post from './pages/Post';
 import Contact from './pages/Contact';
+
 import Profile from './pages/Profile';
+import LayoutWithSidebar from './components/LayoutWithSidebar';
+
+import AdmCourses from './pages/AdminPages/AdmCourses';
+import AdmPayments from './pages/AdminPages/AdmPayments';
+import AdmRoles from './pages/AdminPages/AdmRoles';
+import AdmTeachers from './pages/AdminPages/AdmTeachers';
+import ParentAddChild from './pages/ParentPages/ParentAddChild';
+import ParentPayments from './pages/ParentPages/ParentPayments';
+import TeachClassTime from './pages/TeacherPages/TeachClassTime';
+import TeachPosts from './pages/TeacherPages/TeachPosts';
+import TeachRemChild from './pages/TeacherPages/TeachRemChild';
+import TeachRequests from './pages/TeacherPages/TeachRequests';
+
 import { AuthContext } from './helpers/AuthContext';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
@@ -29,19 +43,19 @@ function App() {
         accessToken: localStorage.getItem('accessToken'),
       },
     })
-    .then((response) => {
-      if (response.data.error) {
-        setAuthState({ ...authState, status: false });
-      } else {
-        setAuthState({
-          username: response.data.username,
-          id: response.data.id,
-          status: true,
-          role: response.data.role
-        });
-      }
-      console.log(authState.username);
-    });
+      .then((response) => {
+        if (response.data.error) {
+          setAuthState({ ...authState, status: false });
+        } else {
+          setAuthState({
+            username: response.data.username,
+            id: response.data.id,
+            status: true,
+            role: response.data.role
+          });
+        }
+        console.log(authState.username);
+      });
   }, []);
 
   return (
@@ -55,11 +69,24 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/register" element={<Register />} />
             <Route path='/blog' element={<Blog />} />
-            <Route path='/contact' element={<Contact/>} />
-            <Route path="/post/:id" exact element={<Post/>}/>
-            <Route path="/profile" element={<Profile />} />
+            <Route path='/contact' element={<Contact />} />
+            <Route path="/post/:id" exact element={<Post />} />
+            <Route path="/profile" element={<LayoutWithSidebar> <Profile /> </LayoutWithSidebar>} />
+
+            <Route path="/admin/courses" element={<LayoutWithSidebar> <AdmCourses /> </LayoutWithSidebar>} />
+            <Route path="/admin/payments" element={<LayoutWithSidebar> <AdmPayments /> </LayoutWithSidebar>} />
+            <Route path="/admin/roles" element={<LayoutWithSidebar> <AdmRoles /> </LayoutWithSidebar>} />
+            <Route path="/admin/teachers" element={<LayoutWithSidebar> <AdmTeachers /> </LayoutWithSidebar>} />
+
+            <Route path="/teacher/posts" element={<LayoutWithSidebar> <TeachPosts /> </LayoutWithSidebar>} />
+            <Route path="/teacher/class-time" element={<LayoutWithSidebar> <TeachClassTime /> </LayoutWithSidebar>} />
+            <Route path="/teacher/remove-child" element={<LayoutWithSidebar> <TeachRemChild /> </LayoutWithSidebar>} />
+            <Route path="/teacher/enrollments" element={<LayoutWithSidebar> <TeachRequests /> </LayoutWithSidebar>} />
+          
+            <Route path="/parent/add-child" element={<LayoutWithSidebar> <ParentAddChild /> </LayoutWithSidebar>} />
+            <Route path="/parent/payments" element={<LayoutWithSidebar> <ParentPayments /> </LayoutWithSidebar>} />          
           </Routes>
-          <Footer/>
+          <Footer />
         </Router>
       </AuthContext.Provider>
     </div>
