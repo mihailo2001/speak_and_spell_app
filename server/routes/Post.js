@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const { Post, User } = require('../models');
+const { Post, User, File } = require('../models');
 
-router.get('/', async (req, res) => {
+router.get('/5posts', async (req, res) => {
     try {
         const listOfPosts = await Post.findAll({
             include: [{
@@ -11,6 +11,32 @@ router.get('/', async (req, res) => {
             }]
         });
         res.json({ listOfPosts: listOfPosts });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/5posts', async (req, res) => {
+    try {
+        const listOfPosts = await Post.findAll({
+            include: [{
+                model: User,
+                attributes: { exclude: ['password'] }
+            }],
+            order: [['createdAt', 'DESC']],
+            limit: 5
+        });
+        res.json({ listOfPosts: listOfPosts });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/:postId/files', async (req, res) => {
+    const { postId } = req.params;
+    try {
+        const files = await File.findAll({ where: { postId } });
+        res.json(files);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
