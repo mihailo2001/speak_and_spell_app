@@ -5,7 +5,7 @@ import { AuthContext } from '../helpers/AuthContext';
 
 const Post = () => {
     let { id } = useParams();
-    const [postObject, setPostObject] = useState({});
+    const [post, setPost] = useState({});
     const [files, setFiles] = useState([]);
     const { authState } = useContext(AuthContext);
     let navigate = useNavigate();
@@ -13,7 +13,7 @@ const Post = () => {
     useEffect(() => {
         axios.get(`http://localhost:3001/posts/${id}`)
             .then((response) => {
-                setPostObject(response.data);
+                setPost(response.data);
             });
     }, [id]);
 
@@ -37,10 +37,10 @@ const Post = () => {
     return (
         <div className='postPage'>
             <div className='postContent'>
-                <h1> {postObject.title} </h1>
-                <div className='postBody'> {postObject.content} </div>
+                <h1> {post.title} </h1>
+                <div className='postBody'> {post.content} </div>
                 <div className='autor'>
-                    autor: {postObject.User?.username}
+                    autor: {post.User?.username}
                 </div>
             </div>
             <div className="imageList">
@@ -50,8 +50,8 @@ const Post = () => {
                     </div>
                 ))}
             </div>
-            {authState.username === postObject.User?.username &&
-                <button className='deletePost' onClick={() => { deletePost(postObject.id); }}> Delete Post </button>
+            {authState.username === post.User?.username &&
+                <button className='deletePost' onClick={() => { deletePost(post.id); }}> Delete Post </button>
             }
         </div>
     )

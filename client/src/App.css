@@ -151,7 +151,8 @@ ul {
 }
 
 .submitButton,
-.deletePost {
+.deletePost,
+.button {
   padding: 10px;
   border: none;
   border-radius: 3px;
@@ -333,7 +334,8 @@ ul {
 
 .contactDiv h1,
 .blogPage h1,
-.postPage h1 {
+.postPage h1,
+.coursePage h1 {
   font-size: 50px;
 }
 
@@ -396,3 +398,19 @@ ul {
   width: auto;
 }
 
+/*Course Page*/
+.coursePage {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  gap: 100px;
+  padding: 10%;
+}
+
+.courseContent {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  text-align: left;
+}
