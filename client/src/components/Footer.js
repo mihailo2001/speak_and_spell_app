@@ -46,9 +46,7 @@ const Footer = () => {
                 <ul>
                     {courses.map((course) => (
                         <li key={course.id}>
-                            <a className="footerCourses" onClick={() => handleCourseClick(course.id)}>
-                                {course.title}
-                            </a>
+                            <Link to={`/course/${course.id}`}>{course.title}</Link>
                         </li>
                     ))}
                 </ul>
