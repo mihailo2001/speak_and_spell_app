@@ -14,15 +14,19 @@ router.get('/', async (req, res) => {
     }
 });
 
-router.get('/:id', async (req, res) => {
-    const { id } = req.params;
+router.get('/all/:userId', async (req, res) => {
+    const { userId } = req.params;
     try {
-        const payment = await Payment.findByPk(id, { include: [{
-            model: User,
-            attributes: { exclude: ['password'] }
-        }] });
-        if (!payment) return res.status(404).json({ message: "Payment not found" });
-        res.json(payment);
+        const payments = await Payment.findAll({
+            where: {
+                userId: userId
+            },
+            order: [
+                ['status', 'DESC'], 
+                ['date', 'DESC']   
+            ]
+        });
+        res.json(payments);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
@@ -53,18 +57,12 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
-    const { id } = req.params;
-    const { amount, date, status, userId } = req.body;
+router.put('/pay/:paymentId', async (req, res) => {
+    const { paymentId } = req.params;
     try {
-        const payment = await Payment.findByPk(id);
-        if (!payment) return res.status(404).json({ message: "Payment not found" });
+        const payment = await Payment.findByPk(paymentId);
 
-        if (amount) payment.amount = amount;
-        if (date) payment.month = month;
-        if (status) payment.status = status;
-        if (userId) payment.userId = userId;
-
+        payment.status = 'paid';
         await payment.save();
         res.json(payment);
     } catch (error) {

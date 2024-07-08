@@ -456,7 +456,7 @@ ul {
 }
 
 .user-content {
-  padding: 5% 10%;
+  padding: 5% 10% 15%;
   text-align: left;
   display: flex;
   flex-direction: column;
@@ -466,4 +466,23 @@ ul {
 
 .user-content h2 {
   font-size: 30px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table, th, td {
+  border: 1px solid black;
+}
+
+th, td {
+  padding: 10px;
+  text-align: left;
+}
+
+th {
+  background-color: #333;
+  color: white;
 }
