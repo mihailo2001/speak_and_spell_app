@@ -67,9 +67,11 @@ const Profile = () => {
       return (
         <div>
           <h2>moji kursevi</h2>
-          <ul>
+          <ul className='listaDjece'>
             {coursesData && coursesData.map((course) => (
+               <div className='djete'>
               <li key={course.id}>{course.title} - {course.weekday} u {course.time}</li>
+              </div>
             ))}
           </ul>
           <br/>
@@ -80,12 +82,14 @@ const Profile = () => {
       return (
         <div>
           <h2>moja djeca</h2>
-          <ul>
+          <ul className='listaDjece'>
             {children && children.map((child) => (
+              <div className='djete'>
               <li key={child.id}>
                 <h4>{child.name}:</h4>
                 {renderEnrollments(child.id)}
               </li>
+              </div>
             ))}
           </ul>
           <br/>

@@ -31,7 +31,6 @@ router.get('/:id', async (req, res) => {
             model: User,
             attributes: { exclude: ['password'] }
         }] });
-        if (!child) return res.status(404).json({ message: "Child not found" });
         res.json(child);
     } catch (error) {
         res.status(500).json({ error: error.message });

@@ -5,7 +5,7 @@ const { Course, User } = require('../models');
 router.get('/', async (req, res) => {
     try {
         const listOfCourses = await Course.findAll();
-        res.json({ listOfCourses: listOfCourses });
+        res.json({ listOfCourses });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

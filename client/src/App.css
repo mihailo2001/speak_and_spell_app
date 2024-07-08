@@ -120,9 +120,28 @@ ul {
   width: 25%;
 }
 
-.formContainer>form {
+.formContainerHorizontal {
+  display: flex;
+  flex-direction: row;
+  justify-content: start;
+  align-items: center;
+  background-color: #fff;
+  padding: 20px;
+  border: 3px solid #333;
+  border-radius: 5px;
+  width: min-content;
+  gap: 24px;
+  text-align: left;
+}
+
+.formContainer > form,
+.formContainerHorizontal > form {
   display: flex;
   flex-direction: column;
+}
+
+.formContainerHorizontal button {
+  width: 120px;
 }
 
 .label {
@@ -464,8 +483,28 @@ ul {
   gap: 12px;
 }
 
+.horizontal-center {
+  align-items: center;
+}
+
 .user-content h2 {
   font-size: 30px;
+}
+
+.listaDjece {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  gap: 12px;
+  list-style-type: none;
+}
+
+.djete {
+  border: 3px solid #333;
+  border-radius: 5px;
+  padding: 10px;
+  width: 100%;
 }
 
 table {
@@ -485,4 +524,8 @@ th, td {
 th {
   background-color: #333;
   color: white;
+}
+
+.add-child-part {
+  padding: 20px;
 }
