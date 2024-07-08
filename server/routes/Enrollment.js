@@ -16,6 +16,7 @@ router.get('/:id', async (req, res) => {
     try {
         const enrollment = await Enrollment.findByPk(id, { include: [Child, Course] });
         if (!enrollment) return res.status(404).json({ message: "Enrollment not found" });
+        console.log(enrollment)
         res.json(enrollment);
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -25,7 +26,10 @@ router.get('/:id', async (req, res) => {
 router.get('/byChild/:childId', async (req, res) => {
     const { childId } = req.params;
     try {
-        const listOfEnrolls = await Enrollment.findAll({ where: { childId: childId } });
+        const listOfEnrolls = await Enrollment.findAll({
+            where: { childId: childId },
+            include: [{ model: Course }]
+        });
         res.json(listOfEnrolls);
     } catch (error) {
         res.status(500).json({ error: error.message });

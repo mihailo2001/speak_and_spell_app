@@ -335,7 +335,8 @@ ul {
 .contactDiv h1,
 .blogPage h1,
 .postPage h1,
-.coursePage h1 {
+.coursePage h1,
+.user-content h1 {
   font-size: 50px;
 }
 
@@ -425,10 +426,17 @@ ul {
   width: 150px;
   background-color: #4d4d4d;
   color: white;
-  padding: 5%;
+  padding: 15%;
   gap: 12px;
   height: min-content;
   left: 0;
+}
+
+.layout {
+  display: flex;
+  flex-direction: row;
+  justify-content: baseline;
+  width: 100%;
 }
 
 .sidebar a {
@@ -441,4 +449,21 @@ ul {
 
 .sidebar a:hover {
   background-color: #757575;
+}
+
+.profile-content {
+  width: 100%;
+}
+
+.user-content {
+  padding: 5% 10%;
+  text-align: left;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 12px;
+}
+
+.user-content h2 {
+  font-size: 30px;
 }

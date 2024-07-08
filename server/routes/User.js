@@ -60,7 +60,7 @@ router.post('/login', async (req, res) => {
             { id: user.id, username: user.username, role: user.role }, // Include username in the payload
             'randomstring'
         );
-        res.json({ token: accessToken, username: user.username, id: user.id });
+        res.json({ token: accessToken, username: user.username, id: user.id, role: user.role });
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

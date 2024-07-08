@@ -14,6 +14,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/byParent/:parentId', async (req, res) => {
+    const { parentId } = req.params;
+    try {
+        const children = await Child.findAll({ where: { userId: parentId } });
+        res.json({ children });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {
@@ -23,16 +33,6 @@ router.get('/:id', async (req, res) => {
         }] });
         if (!child) return res.status(404).json({ message: "Child not found" });
         res.json(child);
-    } catch (error) {
-        res.status(500).json({ error: error.message });
-    }
-});
-
-router.get('/byParent/:parentId', async (req, res) => {
-    const { parentId } = req.params;
-    try {
-        const children = await Child.findAll({ where: { userId: parentId } });
-        res.json(children);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

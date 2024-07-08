@@ -11,6 +11,18 @@ router.get('/', async (req, res) => {
     }
 });
 
+
+router.get('/teacher-data/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const courses = await Course.findAll({ where: { userId: id } });
+        console.log(courses);
+        res.json({ courses });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/:id', async (req, res) => {
     const { id } = req.params;
     try {

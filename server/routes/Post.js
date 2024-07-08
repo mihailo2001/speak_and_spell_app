@@ -32,6 +32,16 @@ router.get('/5posts', async (req, res) => {
     }
 });
 
+router.get('/user-data/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+        const posts = await Post.findAll({ where: { userId: id } });
+        res.json({ posts });
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/:postId/files', async (req, res) => {
     const { postId } = req.params;
     try {
