@@ -7,7 +7,6 @@ const ParentPayments = () => {
   const [payments, setPayments] = useState([]);
 
   useEffect(() => {
-    if (authState.role === 'parent') {
       const fetchPayments = async () => {
         try {
           const response = await axios.get(`http://localhost:3001/payment/all/${authState.id}`);
@@ -17,7 +16,7 @@ const ParentPayments = () => {
         }
       };
       fetchPayments();
-    }
+    
   }, [authState.id]);
 
   if (authState.role !== 'parent') {
@@ -55,7 +54,7 @@ const ParentPayments = () => {
               <td>{payment.status}</td>
               <td>
                 {payment.status === 'unpaid' ? (
-                  <button onClick={() => handlePay(payment.id)}>Pay</button>
+                  <button onClick={() => handlePay(payment.id)}>Plati</button>
                 ) : (
                   <span>Plaćeno</span>
                 )}

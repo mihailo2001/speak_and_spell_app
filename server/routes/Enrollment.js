@@ -23,6 +23,27 @@ router.get('/:id', async (req, res) => {
     }
 });
 
+router.get('/byTeacher/:teacherId', async (req, res) => {
+    const { teacherId } = req.params;
+    try {
+        const listOfEnrollments = await Enrollment.findAll({
+            include: [
+                { 
+                    model: Child 
+                },
+                { 
+                    model: Course,
+                    where: { userId: teacherId }
+                }
+            ],
+            where: {status: 'pending'}
+        });
+        res.json({listOfEnrollments});
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/byChild/:childId', async (req, res) => {
     const { childId } = req.params;
     try {
@@ -66,26 +87,11 @@ router.post('/', async (req, res) => {
     }
 });
 
-router.put('/:id', async (req, res) => {
+router.put('/accept/:id', async (req, res) => {
     const { id } = req.params;
-    const { status, childId, courseId } = req.body;
     try {
         const enrollment = await Enrollment.findByPk(id);
-        if (!enrollment) return res.status(404).json({ message: "Enrollment not found" });
-
-        if (childId) {
-            const child = await Child.findByPk(childId);
-            if (!child) return res.status(404).json({ message: "Child not found" });
-            enrollment.childId = childId;
-        }
-
-        if (courseId) {
-            const course = await Course.findByPk(courseId);
-            if (!course) return res.status(404).json({ message: "Course not found" });
-            enrollment.courseId = courseId;
-        }
-
-        if (status) enrollment.status = status;
+        enrollment.status = 'accepted';
 
         await enrollment.save();
         res.json(enrollment);
