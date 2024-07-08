@@ -24,9 +24,9 @@ const TeachRequests = () => {
     return <p>Nemate pravo pristupa</p>;
   }
 
-  const handleAccept = async (paymentId) => {
+  const handleAccept = async (enrollmentId) => {
     try {
-      await axios.put(`http://localhost:3001/enrollments/accept/${paymentId}`);
+      await axios.put(`http://localhost:3001/enrollments/accept/${enrollmentId}`);
       const response = await axios.get(`http://localhost:3001/enrollments/byTeacher/${authState.id}`);
       
       setEnrollRequests(response.data.listOfEnrollments);

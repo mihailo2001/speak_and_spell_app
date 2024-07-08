@@ -44,6 +44,27 @@ router.get('/byTeacher/:teacherId', async (req, res) => {
     }
 });
 
+router.get('/byTeacherAcc/:teacherId', async (req, res) => {
+    const { teacherId } = req.params;
+    try {
+        const listOfEnrollments = await Enrollment.findAll({
+            include: [
+                { 
+                    model: Child 
+                },
+                { 
+                    model: Course,
+                    where: { userId: teacherId }
+                }
+            ],
+            where: {status: 'accepted'}
+        });
+        res.json({listOfEnrollments});
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.get('/byChild/:childId', async (req, res) => {
     const { childId } = req.params;
     try {
