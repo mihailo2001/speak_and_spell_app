@@ -10,7 +10,8 @@ const Sidebar = () => {
             return (
                 <>
                     <Link to="/admin/teachers">Nastavnici</Link>
-                    <Link to="/admin/courses">Kursevi</Link>
+                    <Link to="/admin/new-course">Dodaj kurs</Link>
+                    <Link to="/admin/courses">Prepravi kurs</Link>
                     <Link to="/admin/payments">Uplate</Link>
                 </>
             );

@@ -534,6 +534,14 @@ th {
   padding: 20px;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: left;
+}
+
 .new-blog {
   width: 100%;
   align-items: center;
@@ -552,4 +560,8 @@ th {
   resize: 'vertical'; 
   font-family: 'inherit';
   font-size: 'inherit'
+}
+
+.specForTime {
+  width: 95%;
 }

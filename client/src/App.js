@@ -14,6 +14,7 @@ import Profile from './pages/Profile';
 import LayoutWithSidebar from './components/LayoutWithSidebar';
 
 import AdmCourses from './pages/AdminPages/AdmCourses';
+import AdmAddCourse from './pages/AdminPages/AdmAddCourse';
 import AdmPayments from './pages/AdminPages/AdmPayments';
 import AdmTeachers from './pages/AdminPages/AdmTeachers';
 import ParentAddChild from './pages/ParentPages/ParentAddChild';
@@ -75,6 +76,7 @@ function App() {
             <Route path="/admin/courses" element={<LayoutWithSidebar> <AdmCourses /> </LayoutWithSidebar>} />
             <Route path="/admin/payments" element={<LayoutWithSidebar> <AdmPayments /> </LayoutWithSidebar>} />
             <Route path="/admin/teachers" element={<LayoutWithSidebar> <AdmTeachers /> </LayoutWithSidebar>} />
+            <Route path="/admin/new-course" element={<LayoutWithSidebar> <AdmAddCourse /> </LayoutWithSidebar>} />
 
             <Route path="/teacher/posts" element={<LayoutWithSidebar> <TeachPosts /> </LayoutWithSidebar>} />
             <Route path="/teacher/class-time" element={<LayoutWithSidebar> <TeachClassTime /> </LayoutWithSidebar>} />

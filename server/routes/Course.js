@@ -4,7 +4,12 @@ const { Course, User } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
-        const listOfCourses = await Course.findAll();
+        const listOfCourses = await Course.findAll({
+            include: [{
+                model: User,
+                attributes: { exclude: ['password'] }
+            }]
+        });
         res.json({ listOfCourses });
     } catch (error) {
         res.status(500).json({ error: error.message });
@@ -40,7 +45,7 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const { title, description, teacherId, weekday, time, cost } = req.body;
     try {
-        await Course.create({
+        const nCourse = await Course.create({
             title: title,
             description: description,
             userId: teacherId, 
@@ -48,7 +53,7 @@ router.post('/', async (req, res) => {
             time: time,
             cost: cost,
         });
-        res.status(201).json("Success");
+        res.status(201).json(nCourse);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
