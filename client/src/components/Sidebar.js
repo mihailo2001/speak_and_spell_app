@@ -11,7 +11,6 @@ const Sidebar = () => {
                 <>
                     <Link to="/admin/teachers">Nastavnici</Link>
                     <Link to="/admin/courses">Kursevi</Link>
-                    <Link to="/admin/roles">Uloge</Link>
                     <Link to="/admin/payments">Uplate</Link>
                 </>
             );
