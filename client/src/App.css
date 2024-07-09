@@ -12,7 +12,8 @@ h1 {
 }
 
 /* Navbar, Footer */
-.navbar, footer {
+.navbar,
+footer {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -26,13 +27,13 @@ h1 {
   justify-content: space-between;
 }
 
-.footer{
+.footer {
   padding: 40px;
   justify-content: space-around;
 }
 
 #logo {
-  width: 60px; 
+  width: 60px;
   height: auto;
 }
 
@@ -87,13 +88,13 @@ h1 {
 }
 
 .footerLinks,
-.footerCourses{
+.footerCourses {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: start;
   color: white;
-} 
+}
 
 ul {
   text-align: start;
@@ -134,8 +135,8 @@ ul {
   text-align: left;
 }
 
-.formContainer > form,
-.formContainerHorizontal > form {
+.formContainer>form,
+.formContainerHorizontal>form {
   display: flex;
   flex-direction: column;
 }
@@ -202,7 +203,7 @@ ul {
   width: 100%;
 }
 
-.mainDiv{
+.mainDiv {
   display: flex;
   flex-direction: row;
   justify-content: center;
@@ -216,7 +217,7 @@ ul {
   text-align: end;
 }
 
-.mainDivText{
+.mainDivText {
   text-wrap: wrap;
   width: 30%;
 }
@@ -225,7 +226,7 @@ ul {
   font-size: 50px;
 }
 
-.mainDiv > img {
+.mainDiv>img {
   width: 40%;
   height: auto;
   border-radius: 10%;
@@ -276,7 +277,7 @@ ul {
   border: 2px solid #333;
   border-radius: 5px;
   overflow: hidden;
-  max-height: 400px; 
+  max-height: 400px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -346,7 +347,7 @@ ul {
   text-align: start;
 }
 
-.contactDiv{
+.contactDiv {
   padding: 10%;
   gap: 12px;
 }
@@ -391,7 +392,7 @@ ul {
   width: 100%;
 }
 
-.blogCard{
+.blogCard {
   width: 25%;
   height: auto;
 }
@@ -512,11 +513,14 @@ table {
   border-collapse: collapse;
 }
 
-table, th, td {
+table,
+th,
+td {
   border: 1px solid black;
 }
 
-th, td {
+th,
+td {
   padding: 10px;
   text-align: left;
 }
@@ -528,4 +532,24 @@ th {
 
 .add-child-part {
   padding: 20px;
+}
+
+.new-blog {
+  width: 100%;
+  align-items: center;
+}
+
+.new-blog * {
+  width: 100%;
+}
+
+.new-blog button {
+  width: 120px;
+}
+
+.new-blog-content {
+  height: '150px';
+  resize: 'vertical'; 
+  font-family: 'inherit';
+  font-size: 'inherit'
 }

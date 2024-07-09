@@ -74,12 +74,12 @@ router.get('/:id', async (req, res) => {
 router.post('/', async (req, res) => {
     const { title, content, userId } = req.body;
     try {
-        await Post.create({
+        const newPost = await Post.create({
             title: title,
             content: content,
             userId: userId
         });
-        res.status(201).json("Post added");
+        res.json(newPost);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }

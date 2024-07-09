@@ -103,9 +103,8 @@ const ParentAddChild = () => {
             </Form>
           </Formik>
         </div>
-
-        <hr />
         
+        <hr />
         <div className='add-child-part'>
           <h2>Upisi dijete na kurs</h2>
           <Formik initialValues={initialValuesAddEnrollment} onSubmit={handleAddEnrollment} validationSchema={validationSchemaAddEnrollment}>

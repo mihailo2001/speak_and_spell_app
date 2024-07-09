@@ -39,20 +39,27 @@ router.get('/:postId', async (req, res) => {
     }
 });
 
-router.post('/', upload.single('file'), async (req, res) => {
-    const { postId } = req.body;
-    const file = req.file;
+
+router.post('/:postId', upload.array('files', 10), async (req, res) => {
+    const { postId } = req.params;
+    const files = req.files;
+  
     try {
-        await File.create({
-            filename: file.originalname,
-            filepath: file.originalname,
-            postId
+      const filePromises = files.map(file => {
+        return File.create({
+          filename: file.originalname,
+          filepath: file.path,
+          postId
         });
-        res.status(201).json("File added");
+      });
+  
+      await Promise.all(filePromises);
+  
+      res.status(201).json("Files added");
     } catch (error) {
-        res.status(500).json({ error: error.message });
+      res.status(500).json({ error: error.message });
     }
-});
+  });
 
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
