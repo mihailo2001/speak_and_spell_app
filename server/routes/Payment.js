@@ -4,15 +4,22 @@ const { Payment, User } = require('../models');
 
 router.get('/', async (req, res) => {
     try {
-        const payment = await Payment.findAll({ include: [{
-            model: User,
-            attributes: { exclude: ['password'] }
-        }] });
+        const payment = await Payment.findAll({ 
+            include: [{
+                model: User,
+                attributes: { exclude: ['password'] }
+            }],
+            order: [
+                ['status', 'DESC'], 
+                ['date', 'DESC']
+            ]
+        });
         res.json(payment);
     } catch (error) {
         res.status(500).json({ error: error.message });
     }
 });
+
 
 router.get('/all/:userId', async (req, res) => {
     const { userId } = req.params;

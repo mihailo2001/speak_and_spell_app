@@ -9,6 +9,8 @@ import Register from './pages/Register';
 import Blog from './pages/Blog';
 import Post from './pages/Post';
 import Contact from './pages/Contact';
+import PageNotFound from './pages/PageNotFound';
+
 
 import Profile from './pages/Profile';
 import LayoutWithSidebar from './components/LayoutWithSidebar';
@@ -85,6 +87,8 @@ function App() {
           
             <Route path="/parent/add-child" element={<LayoutWithSidebar> <ParentAddChild /> </LayoutWithSidebar>} />
             <Route path="/parent/payments" element={<LayoutWithSidebar> <ParentPayments /> </LayoutWithSidebar>} />          
+
+              <Route path="*" exact element={<PageNotFound/>}/>
           </Routes>
           <Footer />
         </Router>

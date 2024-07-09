@@ -356,7 +356,8 @@ ul {
 .blogPage h1,
 .postPage h1,
 .coursePage h1,
-.user-content h1 {
+.user-content h1,
+.fourOfour {
   font-size: 50px;
 }
 
@@ -564,4 +565,14 @@ th {
 
 .specForTime {
   width: 95%;
+}
+
+.fourOfour {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  padding: 20%;
+  gap: 50px;
 }
