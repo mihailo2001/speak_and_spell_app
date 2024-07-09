@@ -88,7 +88,7 @@ function App() {
             <Route path="/parent/add-child" element={<LayoutWithSidebar> <ParentAddChild /> </LayoutWithSidebar>} />
             <Route path="/parent/payments" element={<LayoutWithSidebar> <ParentPayments /> </LayoutWithSidebar>} />          
 
-              <Route path="*" exact element={<PageNotFound/>}/>
+            <Route path="*" exact element={<PageNotFound/>}/>
           </Routes>
           <Footer />
         </Router>

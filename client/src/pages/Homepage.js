@@ -78,7 +78,7 @@ const Homepage = () => {
       </div>
 
       <div className='courseDiv'>
-      <h1>Our Courses</h1>
+      <h1>Nasi kursevi</h1>
         <div className='cardsInDiv'>
           {courses.map((course, index) => (
             <ExpandableCard key={index} image='' title={course.title} text={course.description}/>
@@ -87,7 +87,7 @@ const Homepage = () => {
       </div>
 
       <div className='recentBlogs'>
-        <h1>Recent Blog Posts</h1>
+        <h1>Najnovije objave</h1>
         <div className='cardsInDiv'>
           {posts.map((post, index) => (
             <PostCard key={index} postId={post.id} image={`http://localhost:3001/static/${post.image}`} title={post.title} />

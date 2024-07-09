@@ -1,19 +1,20 @@
+// Navbar.js
 import React, { useState, useEffect, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import { AuthContext } from '../helpers/AuthContext';
+import SearchBar from './SearchBar';  // Import the SearchBar component
 
 const Navbar = () => {
-
   const { authState, setAuthState } = useContext(AuthContext);
+  const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get('http://localhost:3001/auth/auth',
-      {
-        headers: {
-          accessToken: localStorage.getItem('accessToken'),
-        },
-      })
+    axios.get('http://localhost:3001/auth/auth', {
+      headers: {
+        accessToken: localStorage.getItem('accessToken'),
+      },
+    })
       .then((response) => {
         if (response.data.error)
           setAuthState({ ...authState, status: false });
@@ -39,9 +40,7 @@ const Navbar = () => {
     navigate('/');
   };
 
-  //Courses dropdown
   const [courses, setCourses] = useState([]);
-  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchCourses = async () => {
@@ -51,7 +50,7 @@ const Navbar = () => {
       } catch (error) {
         console.log('Error fetching courses', error);
       }
-    }
+    };
     fetchCourses();
   }, []);
 
@@ -60,15 +59,15 @@ const Navbar = () => {
   };
 
   return (
-
     <nav className="navbar">
       <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>
-
         <div className="logoDiv">
           <img id='logo' src="/images/logo.png" alt="Logo" className="logo" />
           <h1>SPEAK & SPELL</h1>
         </div>
       </Link>
+
+      <SearchBar />
 
       <div className="navbar-right">
         <Link to="/">Pocetna</Link>
@@ -100,6 +99,6 @@ const Navbar = () => {
       </div>
     </nav>
   );
-}
+};
 
 export default Navbar;
